@@ -89,7 +89,7 @@ export default class Calculator extends React.Component  {
           <Button handleClick={this.handleMath}>/</Button>
         </div>
         <div className="row">
-          <Button handleClick={this.clear}>clear</Button>
+          <Button handleClick={this.clear}>Clear</Button>
         </div>
       </div>
     )

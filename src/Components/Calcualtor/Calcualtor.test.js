@@ -9,16 +9,18 @@ import Calculator from './index';
 Enzyme.configure({ adapter: new Adapter() })
 
 describe('Calculator', () => {
-  it('should have class calculator', () => {
-    const { container } = render(<Calculator/>);
-    expect(container.firstChild).toHaveClass('calculator')
-  })
+  describe('Behavioural (Integration)', () => {
+    it('should have class calculator', () => {
+      const {container} = render(<Calculator/>);
+      expect(container.firstChild).toHaveClass('calculator')
+    })
 
-  it('should render calculator inside a div tag', () => {
-    const wrapper = shallow(<Calculator/>)
-    const calculator = wrapper.find('div')
-    expect(calculator).toHaveLength(6)
-  })
+    it('should render calculator inside a div tag', () => {
+      const wrapper = shallow(<Calculator/>)
+      const calculator = wrapper.find('div')
+      expect(calculator).toHaveLength(6)
+    })
+  });
 
   describe('Component (Unit)', () => {
     describe('#addNumToInput', () => {
