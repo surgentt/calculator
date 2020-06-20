@@ -1,3 +1,7 @@
+# Welcome to my Calculator
+
+Special thanks to [chamoda](https://github.com/chamoda/react-calculator) for the basic styles.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
