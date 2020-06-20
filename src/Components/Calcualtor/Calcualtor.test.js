@@ -36,7 +36,7 @@ describe('Calculator', () => {
       it('should include a running total of the operations thus far with total', () => {
         expect(wrapper.state('input')).toBe('');
         wrapper.setState({ input: '1+' });
-        wrapper.instance().addToInput('2');
+        wrapper.instance().addNumToInput('2');
         expect(wrapper.state('input')).toBe('1+2');
       });
     })
