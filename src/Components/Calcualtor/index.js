@@ -31,6 +31,16 @@ export default class Calculator extends React.Component  {
     this.setState({ input: newInput, total })
   }
 
+  handleEquals = () => {
+    let safeInput = this.state.input;
+    if (stringEndsInMath(safeInput)) {
+      safeInput = safeInput.slice(0, -1);
+    }
+    // eslint-disable-next-line no-eval
+    const total = eval(safeInput);
+    this.setState({ input: '', total });
+  }
+
   clear = () => {
     this.setState({ input: '', total: 0 });
   }
@@ -63,7 +73,7 @@ export default class Calculator extends React.Component  {
         <div className="row">
           <Button handleClick={this.addNumToInput}>0</Button>
           <Button handleClick={this.addNumToInput}>.</Button>
-          <Button handleClick={this.addNumToInput}>=</Button>
+          <Button handleClick={this.handleEquals}>=</Button>
           <Button handleClick={this.handleMath}>/</Button>
         </div>
         <div className="row">

@@ -41,6 +41,17 @@ describe('Calculator', () => {
       });
     })
 
+    describe('#handleEquals', () => {
+      const wrapper = shallow(<Calculator/>);
+      it('should clear the running total but still display it.', () => {
+        expect(wrapper.state('input')).toBe('');
+        wrapper.setState({ input: '8+8' });
+        wrapper.instance().handleEquals();
+        expect(wrapper.state('input')).toBe('');
+        expect(wrapper.state('total')).toBe(16);
+      });
+    })
+
     describe('#clear', () => {
       const wrapper = shallow(<Calculator/>);
       it('should clear the input state', () => {
