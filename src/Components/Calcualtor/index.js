@@ -3,6 +3,25 @@ import './Calculator.css';
 import Display from './Display';
 import Button from '../Shared/Button';
 
+function safeEval(str) {
+  let safeInput = str;
+  if (stringEndsInMath(safeInput)) {
+    safeInput = safeInput.slice(0, -1);
+  }
+  let total;
+  try {
+    // eslint-disable-next-line no-eval
+    total = eval(safeInput);
+  } catch (error) {
+    if (error.message === 'Unexpected end of input') {
+      total = 'NaN';
+    } else {
+      throw (error);
+    }
+  }
+  return total
+}
+
 function stringEndsInMath(str) {
   return ['+', '-', '/', '*'].includes(str.slice(str.length - 1))
 }
@@ -24,24 +43,13 @@ export default class Calculator extends React.Component  {
     }
 
     const newInput = this.state.input.concat(input);
-    let safeInput = newInput;
-
-    if (stringEndsInMath(newInput)) {
-      safeInput = safeInput.slice(0, -1);
-    }
-    // eslint-disable-next-line no-eval
-    const total = eval(safeInput);
+    const total = safeEval(newInput);
 
     this.setState({ input: newInput, total })
   }
 
   handleEquals = () => {
-    let safeInput = this.state.input;
-    if (stringEndsInMath(safeInput)) {
-      safeInput = safeInput.slice(0, -1);
-    }
-    // eslint-disable-next-line no-eval
-    const total = eval(safeInput);
+    const total = safeEval(this.state.input);
     this.setState({ input: '', total });
   }
 

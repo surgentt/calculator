@@ -47,6 +47,15 @@ describe('Calculator', () => {
         wrapper.instance().handleMath('x');
         expect(wrapper.state('input')).toBe('2*');
       })
+
+      it('should fail gracefully with receiving two math ex. (++) signs in a row', () => {
+        const wrapper = shallow(<Calculator/>);
+        expect(wrapper.state('input')).toBe('');
+        wrapper.setState({ input: '2+' });
+        wrapper.instance().handleMath('+');
+        expect(wrapper.state('input')).toBe('2++');
+        expect(wrapper.state('total')).toBe('NaN');
+      });
     })
 
     describe('#handleEquals', () => {

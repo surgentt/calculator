@@ -15,7 +15,10 @@ const Display = (props) => (
 
 Display.propTypes = {
   input: PropTypes.string.isRequired,
-  total: PropTypes.number.isRequired,
+  total: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
 };
 
 export default Display;
