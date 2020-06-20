@@ -5,12 +5,16 @@ import Button from '../Shared/Button';
 
 export default class Calculator extends React.Component  {
   state = {
-    input: '1',
+    input: '',
   };
 
   addToInput = (textInput) => {
     const newInput = this.state.input.concat(textInput);
     this.setState({ input: newInput });
+  }
+
+  clear = () => {
+    this.setState({ input: '' });
   }
 
   render() {
@@ -42,6 +46,9 @@ export default class Calculator extends React.Component  {
           <Button handleClick={this.addToInput}>.</Button>
           <Button handleClick={this.addToInput}>=</Button>
           <Button handleClick={this.addToInput}>/</Button>
+        </div>
+        <div className="row">
+          <Button handleClick={this.clear}>clear</Button>
         </div>
       </div>
     )

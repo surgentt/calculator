@@ -1,8 +1,34 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
 import Calculator from './index';
 
-test('renders the calculator', () => {
-  const { container } = render(<Calculator/>);
-  expect(container.firstChild).toHaveClass('calculator')
-});
+// Configure enzyme for react 16
+Enzyme.configure({ adapter: new Adapter() })
+
+describe('Calculator', () => {
+  it('should have class calculator', () => {
+    const { container } = render(<Calculator/>);
+    expect(container.firstChild).toHaveClass('calculator')
+  })
+
+  it('should render calculator inside a div tag', () => {
+    const wrapper = shallow(<Calculator/>)
+    const calculator = wrapper.find('div')
+    expect(calculator).toHaveLength(6)
+  })
+
+  describe('Component (Unit)', () => {
+    const wrapper = shallow(<Calculator/>);
+    describe('#clear', () => {
+      it('should clear the input state', () => {
+        expect(wrapper.state('input')).toBe('');
+        wrapper.setState({ input: '1 + 2' });
+        wrapper.instance().clear();
+        expect(wrapper.state('input')).toBe('');
+      });
+    });
+  });
+})
