@@ -4,12 +4,18 @@ import './Display.css';
 
 const Display = (props) => (
   <div className='display'>
-    { props.input }
+    <div className='input'>
+      { props.input }
+    </div>
+    <div className='total'>
+      { props.total }
+    </div>
   </div>
 )
 
 Display.propTypes = {
   input: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 export default Display;

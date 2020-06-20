@@ -21,9 +21,19 @@ describe('Calculator', () => {
   })
 
   describe('Component (Unit)', () => {
-    describe('#addToInput', () => {
+    describe('#addNumToInput', () => {
       const wrapper = shallow(<Calculator/>);
       it('should append a text input to the input state', () => {
+        expect(wrapper.state('input')).toBe('');
+        wrapper.setState({ input: '1+' });
+        wrapper.instance().addNumToInput('2');
+        expect(wrapper.state('input')).toBe('1+2');
+      });
+    })
+
+    describe('#handleMath', () => {
+      const wrapper = shallow(<Calculator/>);
+      it('should include a running total of the operations thus far with total', () => {
         expect(wrapper.state('input')).toBe('');
         wrapper.setState({ input: '1+' });
         wrapper.instance().addToInput('2');
@@ -38,6 +48,7 @@ describe('Calculator', () => {
         wrapper.setState({ input: '1 + 2' });
         wrapper.instance().clear();
         expect(wrapper.state('input')).toBe('');
+        expect(wrapper.state('total')).toBe(0);
       });
     });
   });
