@@ -32,13 +32,21 @@ describe('Calculator', () => {
     })
 
     describe('#handleMath', () => {
-      const wrapper = shallow(<Calculator/>);
       it('should include a running total of the operations thus far with total', () => {
+        const wrapper = shallow(<Calculator/>);
         expect(wrapper.state('input')).toBe('');
         wrapper.setState({ input: '1+' });
-        wrapper.instance().addNumToInput('2');
+        wrapper.instance().handleMath('2');
         expect(wrapper.state('input')).toBe('1+2');
       });
+
+      it('should change x to *', () => {
+        const wrapper = shallow(<Calculator/>);
+        expect(wrapper.state('input')).toBe('');
+        wrapper.setState({ input: '2' });
+        wrapper.instance().handleMath('x');
+        expect(wrapper.state('input')).toBe('2*');
+      })
     })
 
     describe('#handleEquals', () => {

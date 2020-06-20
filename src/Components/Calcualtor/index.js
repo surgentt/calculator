@@ -19,6 +19,10 @@ export default class Calculator extends React.Component  {
   }
 
   handleMath = (input) => {
+    if (input === 'x') {
+      input = '*';
+    }
+
     const newInput = this.state.input.concat(input);
     let safeInput = newInput;
 
