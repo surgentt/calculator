@@ -21,8 +21,18 @@ describe('Calculator', () => {
   })
 
   describe('Component (Unit)', () => {
-    const wrapper = shallow(<Calculator/>);
+    describe('#addToInput', () => {
+      const wrapper = shallow(<Calculator/>);
+      it('should append a text input to the input state', () => {
+        expect(wrapper.state('input')).toBe('');
+        wrapper.setState({ input: '1+' });
+        wrapper.instance().addToInput('2');
+        expect(wrapper.state('input')).toBe('1+2');
+      });
+    })
+
     describe('#clear', () => {
+      const wrapper = shallow(<Calculator/>);
       it('should clear the input state', () => {
         expect(wrapper.state('input')).toBe('');
         wrapper.setState({ input: '1 + 2' });
